@@ -71,12 +71,12 @@ export default function Home() {
       )}&job_title=${watch('job_title')}`
     );
     if (!res.ok) {
-      alert("Đã xảy ra lỗi, vui lòng liên hệ BTC để được hỗ trợ!");
+      // alert("Đã xảy ra lỗi, vui lòng liên hệ BTC để được hỗ trợ!");
       openError();
       return;
     }
     open();
-    alert("Đăng ký thành công!");
+    // alert("Đăng ký thành công!");
     // let resJson = await res.json();
     // console.log(resJson);
   };
