@@ -22,6 +22,7 @@ import {
   MapPinIcon,
 } from '@heroicons/react/24/solid';
 import { useState } from 'react';
+import { ErrorMessage } from '@hookform/error-message';
 
 type Inputs = {
   email: string;
@@ -38,44 +39,52 @@ export default function Home() {
     handleSubmit,
     watch,
     reset,
+    formState: { errors },
   } = useForm<Inputs>();
 
   let [isOpen, setIsOpen] = useState(false);
 
   function open() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
 
   function close() {
-    reset()
-    setIsOpen(false)
+    reset();
+    setIsOpen(false);
   }
 
   let [isErrorOpen, setIsErrorOpen] = useState(false);
 
   function openError() {
-    setIsErrorOpen(true)
+    setIsErrorOpen(true);
   }
 
   function closeError() {
-    reset()
-    setIsErrorOpen(false)
+    setIsErrorOpen(false);
   }
 
+  let [loading, setLoading] = useState(false);
+
   const onSubmit: SubmitHandler<Inputs> = async () => {
-    let res = await fetch(
-      `https://warrior.gdgcloudhanoi.dev/register?email=${watch('email')}&first=${watch(
-        'first'
-      )}&last=${watch('last')}&birth=${watch('birth')}&gender=${watch(
-        'gender'
-      )}&job_title=${watch('job_title')}`
-    );
-    if (!res.ok) {
-      // alert("Đã xảy ra lỗi, vui lòng liên hệ BTC để được hỗ trợ!");
-      openError();
-      return;
+    setLoading(true);
+    //https://warrior.gdgcloudhanoi.dev
+    try {
+      let res = await fetch(
+        `http://localhost:8005/register?email=${watch('email')}&first=${watch(
+          'first'
+        )}&last=${watch('last')}&birth=${watch('birth')}&gender=${watch(
+          'gender'
+        )}&job_title=${watch('job_title')}`
+      );
+      if (!res.ok) {
+        // alert("Đã xảy ra lỗi, vui lòng liên hệ BTC để được hỗ trợ!");
+        openError();
+        return;
+      }
+      open();
+    } finally {
+      setLoading(false);
     }
-    open();
     // alert("Đăng ký thành công!");
     // let resJson = await res.json();
     // console.log(resJson);
@@ -223,10 +232,20 @@ export default function Home() {
                           <span className="relative block w-full before:absolute before:inset-px before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-white before:shadow dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-inset after:ring-transparent sm:after:focus-within:ring-2 sm:after:focus-within:ring-blue-500 has-[[data-disabled]]:opacity-50 before:has-[[data-disabled]]:bg-zinc-950/5 before:has-[[data-disabled]]:shadow-none before:has-[[data-invalid]]:shadow-red-500/10">
                             <input
                               placeholder="Nguyen Van"
-                              className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border border-zinc-950/10 data-[hover]:border-zinc-950/20 dark:border-white/10 dark:data-[hover]:border-white/20 bg-transparent dark:bg-white/5 focus:outline-none data-[invalid]:border-red-500 data-[invalid]:data-[hover]:border-red-500 data-[invalid]:dark:border-red-500 data-[invalid]:data-[hover]:dark:border-red-500 data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15 data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]"
-                              {...register('last', { required: true })}
+                              className={[
+                                'relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border bg-transparent data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]',
+                                errors.last
+                                  ? 'border-red-700 data-[hover]:border-red-700 dark:border-red-700 data-[hover]:dark:border-red-700'
+                                  : 'border-zinc-950/10 data-[hover]:border-zinc-950/20 dark:border-white/10 dark:data-[hover]:border-white/20 dark:bg-white/5 focus:outline-none data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15',
+                              ].join(' ')}
+                              {...register('last', {
+                                required: 'Vui lòng nhập họ',
+                              })}
                             />
                           </span>
+                          {/* <span className="select-none text-base/10 text-red-700 data-[disabled]:opacity-50 sm:text-sm/10 dark:text-white">
+                            <ErrorMessage errors={errors} name="last" />
+                          </span> */}
                         </div>
                         <div className="space-y-4">
                           <label
@@ -237,10 +256,20 @@ export default function Home() {
                           <span className="relative block w-full before:absolute before:inset-px before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-white before:shadow dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-inset after:ring-transparent sm:after:focus-within:ring-2 sm:after:focus-within:ring-blue-500 has-[[data-disabled]]:opacity-50 before:has-[[data-disabled]]:bg-zinc-950/5 before:has-[[data-disabled]]:shadow-none before:has-[[data-invalid]]:shadow-red-500/10">
                             <input
                               placeholder="A"
-                              className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border border-zinc-950/10 data-[hover]:border-zinc-950/20 dark:border-white/10 dark:data-[hover]:border-white/20 bg-transparent dark:bg-white/5 focus:outline-none data-[invalid]:border-red-500 data-[invalid]:data-[hover]:border-red-500 data-[invalid]:dark:border-red-500 data-[invalid]:data-[hover]:dark:border-red-500 data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15 data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]"
-                              {...register('first', { required: true })}
+                              className={[
+                                'relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border bg-transparent data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]',
+                                errors.first
+                                  ? 'border-red-700 data-[hover]:border-red-700 dark:border-red-700 data-[hover]:dark:border-red-700'
+                                  : 'border-zinc-950/10 data-[hover]:border-zinc-950/20 dark:border-white/10 dark:data-[hover]:border-white/20 dark:bg-white/5 focus:outline-none data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15',
+                              ].join(' ')}
+                              {...register('first', {
+                                required: 'Vui lòng nhập tên',
+                              })}
                             />
                           </span>
+                          {/* <span className="select-none text-base/10 text-red-700 data-[disabled]:opacity-50 sm:text-sm/10 dark:text-white">
+                            <ErrorMessage errors={errors} name="first" />
+                          </span> */}
                         </div>
                       </div>
                       <div className="mt-3 space-y-4">
@@ -252,9 +281,24 @@ export default function Home() {
                         <span className="relative block w-full before:absolute before:inset-px before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-white before:shadow dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-inset after:ring-transparent sm:after:focus-within:ring-2 sm:after:focus-within:ring-blue-500 has-[[data-disabled]]:opacity-50 before:has-[[data-disabled]]:bg-zinc-950/5 before:has-[[data-disabled]]:shadow-none before:has-[[data-invalid]]:shadow-red-500/10">
                           <input
                             placeholder="nguyenvana@gmail.com"
-                            className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border border-zinc-950/10 data-[hover]:border-zinc-950/20 dark:border-white/10 dark:data-[hover]:border-white/20 bg-transparent dark:bg-white/5 focus:outline-none data-[invalid]:border-red-500 data-[invalid]:data-[hover]:border-red-500 data-[invalid]:dark:border-red-500 data-[invalid]:data-[hover]:dark:border-red-500 data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15 data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]"
-                            {...register('email', { required: true })}
+                            className={[
+                              'relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border bg-transparent data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]',
+                              errors.email
+                                ? 'border-red-700 data-[hover]:border-red-700 dark:border-red-700 data-[hover]:dark:border-red-700'
+                                : 'border-zinc-950/10 data-[hover]:border-zinc-950/20 dark:border-white/10 dark:data-[hover]:border-white/20 dark:bg-white/5 focus:outline-none data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15',
+                            ].join(' ')}
+                            {...register('email', {
+                              required: 'Vui lòng nhập email.',
+                              pattern: {
+                                value:
+                                  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                message: 'Email không hợp lệ.',
+                              },
+                            })}
                           />
+                        </span>
+                        <span className="select-none text-base/10 text-red-700 data-[disabled]:opacity-50 sm:text-sm/10 dark:text-white">
+                          <ErrorMessage errors={errors} name="email" />
                         </span>
                       </div>
                       <div className="mt-3 space-y-4">
@@ -266,11 +310,21 @@ export default function Home() {
                         <span className="relative block w-full before:absolute before:inset-px before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-white before:shadow dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-inset after:ring-transparent sm:after:focus-within:ring-2 sm:after:focus-within:ring-blue-500 has-[[data-disabled]]:opacity-50 before:has-[[data-disabled]]:bg-zinc-950/5 before:has-[[data-disabled]]:shadow-none before:has-[[data-invalid]]:shadow-red-500/10">
                           <input
                             type="date"
-                            placeholder='18/01/2001'
-                            className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border border-zinc-950/10 data-[hover]:border-zinc-950/20 dark:border-white/10 dark:data-[hover]:border-white/20 bg-transparent dark:bg-white/5 focus:outline-none data-[invalid]:border-red-500 data-[invalid]:data-[hover]:border-red-500 data-[invalid]:dark:border-red-500 data-[invalid]:data-[hover]:dark:border-red-500 data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15 data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]"
-                            {...register('birth', { required: true })}
+                            placeholder="01/01/2001"
+                            className={[
+                              'relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border bg-transparent data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]',
+                              errors.birth
+                                ? 'border-red-700 data-[hover]:border-red-700 dark:border-red-700 data-[hover]:dark:border-red-700'
+                                : 'border-zinc-950/10 data-[hover]:border-zinc-950/20 dark:border-white/10 dark:data-[hover]:border-white/20 dark:bg-white/5 focus:outline-none data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15',
+                            ].join(' ')}
+                            {...register('birth', {
+                              required: 'Vui lòng chọn',
+                            })}
                           />
                         </span>
+                        {/* <span className="select-none text-base/10 text-red-700 data-[disabled]:opacity-50 sm:text-sm/10 dark:text-white">
+                          <ErrorMessage errors={errors} name="birth" />
+                        </span> */}
                       </div>
                       <div className="mt-3 space-y-4">
                         <label
@@ -280,17 +334,41 @@ export default function Home() {
                         </label>
                         <span className="relative block w-full before:absolute before:inset-px before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-white before:shadow dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-inset after:ring-transparent sm:after:focus-within:ring-2 sm:after:focus-within:ring-blue-500 has-[[data-disabled]]:opacity-50 before:has-[[data-disabled]]:bg-zinc-950/5 before:has-[[data-disabled]]:shadow-none before:has-[[data-invalid]]:shadow-red-500/10">
                           <select
-                            className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border border-zinc-950/10 data-[hover]:border-zinc-950/20 dark:border-white/10 dark:data-[hover]:border-white/20 bg-transparent dark:bg-white/5 focus:outline-none data-[invalid]:border-red-500 data-[invalid]:data-[hover]:border-red-500 data-[invalid]:dark:border-red-500 data-[invalid]:data-[hover]:dark:border-red-500 data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15 data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]"
+                            className={[
+                              'relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border bg-transparent data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]',
+                              errors.gender
+                                ? 'border-red-700 data-[hover]:border-red-700 dark:border-red-700 data-[hover]:dark:border-red-700'
+                                : 'border-zinc-950/10 data-[hover]:border-zinc-950/20 dark:border-white/10 dark:data-[hover]:border-white/20 dark:bg-white/5 focus:outline-none data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15',
+                            ].join(' ')}
                             {...register('gender', {
-                              required: true,
+                              required: 'Vui lòng chọn',
                               pattern: /^[012]$/i,
                             })}>
-                            <option className='text-zinc-950 dark:text-white bg-white dark:bg-zinc-950'>Vui lòng chọn</option>
-                            <option className='text-zinc-950 dark:text-white bg-white dark:bg-zinc-950' value="0">Nam</option>
-                            <option className='text-zinc-950 dark:text-white bg-white dark:bg-zinc-950' value="1">Nữ</option>
-                            <option className='text-zinc-950 dark:text-white bg-white dark:bg-zinc-950' value="2">Khác</option>
+                            <option
+                              value=""
+                              className="text-zinc-950 dark:text-white bg-white dark:bg-zinc-950">
+                              Vui lòng chọn
+                            </option>
+                            <option
+                              className="text-zinc-950 dark:text-white bg-white dark:bg-zinc-950"
+                              value="0">
+                              Nam
+                            </option>
+                            <option
+                              className="text-zinc-950 dark:text-white bg-white dark:bg-zinc-950"
+                              value="1">
+                              Nữ
+                            </option>
+                            <option
+                              className="text-zinc-950 dark:text-white bg-white dark:bg-zinc-950"
+                              value="2">
+                              Khác
+                            </option>
                           </select>
                         </span>
+                        {/* <span className="select-none text-base/10 text-red-700 data-[disabled]:opacity-50 sm:text-sm/10 dark:text-white">
+                          <ErrorMessage errors={errors} name="gender" />
+                        </span> */}
                       </div>
                       <div className="mt-3 space-y-4">
                         <label
@@ -301,8 +379,15 @@ export default function Home() {
                         <span className="relative block w-full before:absolute before:inset-px before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-white before:shadow dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-inset after:ring-transparent sm:after:focus-within:ring-2 sm:after:focus-within:ring-blue-500 has-[[data-disabled]]:opacity-50 before:has-[[data-disabled]]:bg-zinc-950/5 before:has-[[data-disabled]]:shadow-none before:has-[[data-invalid]]:shadow-red-500/10">
                           <input
                             placeholder="Mobile Developer"
-                            className="relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border border-zinc-950/10 data-[hover]:border-zinc-950/20 dark:border-white/10 dark:data-[hover]:border-white/20 bg-transparent dark:bg-white/5 focus:outline-none data-[invalid]:border-red-500 data-[invalid]:data-[hover]:border-red-500 data-[invalid]:dark:border-red-500 data-[invalid]:data-[hover]:dark:border-red-500 data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15 data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]"
-                            {...register('job_title', { required: true })}
+                            className={[
+                              'relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border bg-transparent data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]',
+                              errors.job_title
+                                ? 'border-red-700 data-[hover]:border-red-700 dark:border-red-700 data-[hover]:dark:border-red-700'
+                                : 'border-zinc-950/10 data-[hover]:border-zinc-950/20 dark:border-white/10 dark:data-[hover]:border-white/20 dark:bg-white/5 focus:outline-none data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15',
+                            ].join(' ')}
+                            {...register('job_title', {
+                              required: 'Vui lòng nhập nghề nghiệp',
+                            })}
                           />
                         </span>
                       </div>
@@ -310,7 +395,29 @@ export default function Home() {
                   </fieldset>
                   <Button
                     type="submit"
-                    className="transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-100 relative isolate inline-flex items-center justify-center gap-x-2 rounded-lg border text-base/6 font-semibold px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing.3)-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] sm:text-sm/6 focus:outline-none data-[focus]:outline data-[focus]:outline-2 data-[focus]:outline-offset-2 data-[focus]:outline-blue-500 data-[disabled]:opacity-50 [&>[data-slot=icon]]:-mx-0.5 [&>[data-slot=icon]]:my-0.5 [&>[data-slot=icon]]:size-5 [&>[data-slot=icon]]:shrink-0 [&>[data-slot=icon]]:text-[--btn-icon] [&>[data-slot=icon]]:sm:my-1 [&>[data-slot=icon]]:sm:size-4 forced-colors:[--btn-icon:ButtonText] forced-colors:data-[hover]:[--btn-icon:ButtonText] border-transparent bg-[--btn-border] dark:bg-[--btn-bg] before:absolute before:inset-0 before:-z-10 before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-[--btn-bg] before:shadow dark:before:hidden dark:border-white/5 after:absolute after:inset-0 after:-z-10 after:rounded-[calc(theme(borderRadius.lg)-1px)] after:shadow-[shadow:inset_0_1px_theme(colors.white/15%)] after:data-[active]:bg-[--btn-hover-overlay] after:data-[hover]:bg-[--btn-hover-overlay] dark:after:-inset-px dark:after:rounded-lg before:data-[disabled]:shadow-none after:data-[disabled]:shadow-none text-white [--btn-bg:theme(colors.zinc.900)] [--btn-border:theme(colors.zinc.950/90%)] [--btn-hover-overlay:theme(colors.white/10%)] dark:text-white dark:[--btn-bg:theme(colors.zinc.600)] dark:[--btn-hover-overlay:theme(colors.white/5%)] [--btn-icon:theme(colors.zinc.400)] data-[active]:[--btn-icon:theme(colors.zinc.300)] data-[hover]:[--btn-icon:theme(colors.white)]">
+                    disabled={loading}
+                    className="transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-100 px-4 py-2 relative isolate inline-flex items-center justify-center gap-x-2 rounded-lg border text-base/6 font-semibold sm:text-sm/6 focus:outline-none data-[focus]:outline data-[focus]:outline-2 data-[focus]:outline-offset-2 data-[focus]:outline-blue-500 data-[disabled]:opacity-50 [&>[data-slot=icon]]:-mx-0.5 [&>[data-slot=icon]]:my-0.5 [&>[data-slot=icon]]:size-5 [&>[data-slot=icon]]:shrink-0 [&>[data-slot=icon]]:text-[--btn-icon] [&>[data-slot=icon]]:sm:my-1 [&>[data-slot=icon]]:sm:size-4 forced-colors:[--btn-icon:ButtonText] forced-colors:data-[hover]:[--btn-icon:ButtonText] border-transparent bg-[--btn-border] dark:bg-[--btn-bg] before:absolute before:inset-0 before:-z-10 before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-[--btn-bg] before:shadow dark:before:hidden dark:border-white/5 after:absolute after:inset-0 after:-z-10 after:rounded-[calc(theme(borderRadius.lg)-1px)] after:shadow-[shadow:inset_0_1px_theme(colors.white/15%)] after:data-[active]:bg-[--btn-hover-overlay] after:data-[hover]:bg-[--btn-hover-overlay] dark:after:-inset-px dark:after:rounded-lg before:data-[disabled]:shadow-none after:data-[disabled]:shadow-none text-white [--btn-bg:theme(colors.zinc.900)] [--btn-border:theme(colors.zinc.950/90%)] [--btn-hover-overlay:theme(colors.white/10%)] dark:text-white dark:[--btn-bg:theme(colors.zinc.600)] dark:[--btn-hover-overlay:theme(colors.white/5%)] [--btn-icon:theme(colors.zinc.400)] data-[active]:[--btn-icon:theme(colors.zinc.300)] data-[hover]:[--btn-icon:theme(colors.white)]">
+                    {loading ? (
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24">
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          stroke-width="4"></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                    ) : (
+                      <></>
+                    )}
                     Nộp đơn
                   </Button>
                 </form>
@@ -353,24 +460,29 @@ export default function Home() {
           </Link>
         </div>
       </footer>
-      <Dialog open={isOpen} as="div" className="relative z-10 focus:outline-none shadow-2xl" onClose={close}>
+      <Dialog
+        open={isOpen}
+        as="div"
+        className="relative z-10 focus:outline-none shadow-2xl"
+        onClose={close}>
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto shadow-2xl">
           <div className="flex min-h-full items-center justify-center p-4">
             <DialogPanel
               transition
-              className="w-full max-w-md rounded-xl bg-white p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0 shadow-2xl"
-            >
-              <DialogTitle as="h3" className="text-base/7 font-medium text-neutral-950 dark:text-gray-50">
+              className="w-full max-w-md rounded-xl bg-white p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0 shadow-2xl">
+              <DialogTitle
+                as="h3"
+                className="text-base/7 font-medium text-neutral-950 dark:text-gray-50">
                 Đăng ký thành công
               </DialogTitle>
               <p className="mt-2 text-sm/6 text-neutral-950 dark:text-gray-50">
-                Chúc mừng bạn đã đăng ký thành công cuộc thi Warrior Developers. Hẹn gặp bạn vào ngày diễn ra sự kiện nhé!
+                Chúc mừng bạn đã đăng ký thành công cuộc thi Warrior Developers.
+                Hẹn gặp bạn vào ngày diễn ra sự kiện nhé!
               </p>
               <div className="mt-4">
                 <Button
                   className="transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-100 relative isolate inline-flex items-center justify-center gap-x-2 rounded-lg border text-base/6 font-semibold px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing.3)-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] sm:text-sm/6 focus:outline-none data-[focus]:outline data-[focus]:outline-2 data-[focus]:outline-offset-2 data-[focus]:outline-blue-500 data-[disabled]:opacity-50 [&>[data-slot=icon]]:-mx-0.5 [&>[data-slot=icon]]:my-0.5 [&>[data-slot=icon]]:size-5 [&>[data-slot=icon]]:shrink-0 [&>[data-slot=icon]]:text-[--btn-icon] [&>[data-slot=icon]]:sm:my-1 [&>[data-slot=icon]]:sm:size-4 forced-colors:[--btn-icon:ButtonText] forced-colors:data-[hover]:[--btn-icon:ButtonText] border-transparent bg-[--btn-border] dark:bg-[--btn-bg] before:absolute before:inset-0 before:-z-10 before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-[--btn-bg] before:shadow dark:before:hidden dark:border-white/5 after:absolute after:inset-0 after:-z-10 after:rounded-[calc(theme(borderRadius.lg)-1px)] after:shadow-[shadow:inset_0_1px_theme(colors.white/15%)] after:data-[active]:bg-[--btn-hover-overlay] after:data-[hover]:bg-[--btn-hover-overlay] dark:after:-inset-px dark:after:rounded-lg before:data-[disabled]:shadow-none after:data-[disabled]:shadow-none text-white [--btn-bg:theme(colors.zinc.900)] [--btn-border:theme(colors.zinc.950/90%)] [--btn-hover-overlay:theme(colors.white/10%)] dark:text-white dark:[--btn-bg:theme(colors.zinc.600)] dark:[--btn-hover-overlay:theme(colors.white/5%)] [--btn-icon:theme(colors.zinc.400)] data-[active]:[--btn-icon:theme(colors.zinc.300)] data-[hover]:[--btn-icon:theme(colors.white)]"
-                  onClick={close}
-                >
+                  onClick={close}>
                   Đã hiểu
                 </Button>
               </div>
@@ -378,24 +490,34 @@ export default function Home() {
           </div>
         </div>
       </Dialog>
-      <Dialog open={isErrorOpen} as="div" className="relative z-10 focus:outline-none shadow-2xl" onClose={close}>
+      <Dialog
+        open={isErrorOpen}
+        as="div"
+        className="relative z-10 focus:outline-none shadow-2xl"
+        onClose={close}>
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto shadow-2xl">
           <div className="flex min-h-full items-center justify-center p-4">
             <DialogPanel
               transition
-              className="w-full max-w-md rounded-xl bg-white p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0 shadow-2xl"
-            >
-              <DialogTitle as="h3" className="text-base/7 font-medium text-neutral-950 dark:text-gray-50">
+              className="w-full max-w-md rounded-xl bg-white p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0 shadow-2xl">
+              <DialogTitle
+                as="h3"
+                className="text-base/7 font-medium text-neutral-950 dark:text-gray-50">
                 Đã xảy ra lỗi,
               </DialogTitle>
               <p className="mt-2 text-sm/6 text-neutral-950 dark:text-gray-50">
-                Bạn vui lòng liên hệ BTC tại <a className='font-bold' href="https://www.messenger.com/t/697780110667545">đây</a> để được hỗ trợ nhé!
+                Bạn vui lòng liên hệ BTC tại{' '}
+                <a
+                  className="font-bold"
+                  href="https://www.messenger.com/t/697780110667545">
+                  đây
+                </a>{' '}
+                để được hỗ trợ nhé!
               </p>
               <div className="mt-4">
                 <Button
                   className="transition ease-in-out hover:-translate-y-1 hover:scale-105 duration-100 relative isolate inline-flex items-center justify-center gap-x-2 rounded-lg border text-base/6 font-semibold px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing.3)-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] sm:text-sm/6 focus:outline-none data-[focus]:outline data-[focus]:outline-2 data-[focus]:outline-offset-2 data-[focus]:outline-blue-500 data-[disabled]:opacity-50 [&>[data-slot=icon]]:-mx-0.5 [&>[data-slot=icon]]:my-0.5 [&>[data-slot=icon]]:size-5 [&>[data-slot=icon]]:shrink-0 [&>[data-slot=icon]]:text-[--btn-icon] [&>[data-slot=icon]]:sm:my-1 [&>[data-slot=icon]]:sm:size-4 forced-colors:[--btn-icon:ButtonText] forced-colors:data-[hover]:[--btn-icon:ButtonText] border-transparent bg-[--btn-border] dark:bg-[--btn-bg] before:absolute before:inset-0 before:-z-10 before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-[--btn-bg] before:shadow dark:before:hidden dark:border-white/5 after:absolute after:inset-0 after:-z-10 after:rounded-[calc(theme(borderRadius.lg)-1px)] after:shadow-[shadow:inset_0_1px_theme(colors.white/15%)] after:data-[active]:bg-[--btn-hover-overlay] after:data-[hover]:bg-[--btn-hover-overlay] dark:after:-inset-px dark:after:rounded-lg before:data-[disabled]:shadow-none after:data-[disabled]:shadow-none text-white [--btn-bg:theme(colors.zinc.900)] [--btn-border:theme(colors.zinc.950/90%)] [--btn-hover-overlay:theme(colors.white/10%)] dark:text-white dark:[--btn-bg:theme(colors.zinc.600)] dark:[--btn-hover-overlay:theme(colors.white/5%)] [--btn-icon:theme(colors.zinc.400)] data-[active]:[--btn-icon:theme(colors.zinc.300)] data-[hover]:[--btn-icon:theme(colors.white)]"
-                  onClick={closeError}
-                >
+                  onClick={closeError}>
                   Đã hiểu
                 </Button>
               </div>
