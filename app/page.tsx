@@ -67,10 +67,9 @@ export default function Home() {
 
   const onSubmit: SubmitHandler<Inputs> = async () => {
     setLoading(true);
-    //https://warrior.gdgcloudhanoi.dev
     try {
       let res = await fetch(
-        `http://localhost:8005/register?email=${watch('email')}&first=${watch(
+        `https://warrior.gdgcloudhanoi.dev/register?email=${watch('email')}&first=${watch(
           'first'
         )}&last=${watch('last')}&birth=${watch('birth')}&gender=${watch(
           'gender'
