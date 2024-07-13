@@ -12,8 +12,14 @@ import googlefordevelopers from '@/public/googlefordevelopers.svg';
 import x from '@/public/x.svg';
 import linkedin from '@/public/linkedin.svg';
 import facebook from '@/public/facebook.svg';
-import demos_icon from '@/public/demos_icon.svg';
-import demos_icon_dark from '@/public/demos_icon_dark.svg';
+import mascot from '@/public/mascot.png';
+import banner from '@/public/banner.png';
+import gdgcloudhanoi from '@/public/gdgcloudhanoi.png';
+import via from '@/public/via.png';
+import ptit from '@/public/ptit.png';
+import fci from '@/public/fci.png';
+import gdg from '@/public/gdg.png';
+import banner_mobile from '@/public/banner_mobile.png';
 import ThemeSwitcher from '@/components/ThemeSwitcher';
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import {
@@ -69,11 +75,11 @@ export default function Home() {
     setLoading(true);
     try {
       let res = await fetch(
-        `https://warrior.gdgcloudhanoi.dev/register?email=${watch('email')}&first=${watch(
-          'first'
-        )}&last=${watch('last')}&birth=${watch('birth')}&gender=${watch(
-          'gender'
-        )}&job_title=${watch('job_title')}`
+        `https://warrior.gdgcloudhanoi.dev/register?email=${watch(
+          'email'
+        )}&first=${watch('first')}&last=${watch('last')}&birth=${watch(
+          'birth'
+        )}&gender=${watch('gender')}&job_title=${watch('job_title')}`
       );
       if (!res.ok) {
         // alert("Đã xảy ra lỗi, vui lòng liên hệ BTC để được hỗ trợ!");
@@ -154,6 +160,66 @@ export default function Home() {
           </div>
         </div>
 
+        <div className="rounded-4xl bg-neutral-900 py-16 sm:py-24">
+          <div className="mx-auto max-w-6xl px-8">
+            <div className="flex items-center gap-x-8">
+              <h2 className="text-center font-display text-sm font-semibold tracking-wider text-white sm:text-left">
+                Đồng hành cùng chương trình
+              </h2>
+              <div className="h-px flex-auto bg-neutral-800"></div>
+            </div>
+            <div>
+              <ul className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-5">
+                <li key={1}>
+                  <span className="relative">
+                    <Image
+                      className="w-64"
+                      src={gdgcloudhanoi}
+                      alt="Google I/O Extended Cloud Hanoi 2024"
+                    />
+                  </span>
+                </li>
+                <li key={4}>
+                  <span className="relative">
+                    <Image
+                      className="w-64"
+                      src={fci}
+                      alt="Google I/O Extended Cloud Hanoi 2024"
+                    />
+                  </span>
+                </li>
+                <li key={2}>
+                  <span className="relative">
+                    <Image
+                      className="w-64"
+                      src={gdg}
+                      alt="Google I/O Extended Cloud Hanoi 2024"
+                    />
+                  </span>
+                </li>
+                <li key={5}>
+                  <span className="relative">
+                    <Image
+                      className="w-64"
+                      src={ptit}
+                      alt="Google I/O Extended Cloud Hanoi 2024"
+                    />
+                  </span>
+                </li>
+                <li key={3}>
+                  <span className="relative">
+                    <Image
+                      className="w-64"
+                      src={via}
+                      alt="Google I/O Extended Cloud Hanoi 2024"
+                    />
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         <div
           id="info"
           className="mx-auto max-w-6xl px-8 mt-8 lg:mt-12 text-neutral-950 dark:text-gray-50">
@@ -167,7 +233,7 @@ export default function Home() {
                 <article>
                   <MapPinIcon className="w-8" />
                   <p className="mt-6 font-display text-2xl font-semibold ">
-                    Hội trường A2, Học viện Công nghệ Bưu chính viễn thông
+                    Học viện Công nghệ Bưu chính viễn thông
                   </p>
                   <p className="mt-4 text-base">
                     96A Đường Trần Phú, P. Mộ Lao, Hà Đông, Hà Nội
@@ -196,16 +262,43 @@ export default function Home() {
         </div>
 
         <div
+          id="banner"
+          className="mx-auto max-w-6xl px-8 mt-8 lg:mt-12 text-neutral-950 dark:text-gray-50">
+          <div className="relative h-full w-full rounded-xl bg-white shadow-[0px_0px_0px_1px_rgba(9,9,11,0.07),0px_2px_2px_0px_rgba(9,9,11,0.05)] dark:bg-zinc-900 dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)] dark:before:pointer-events-none dark:before:absolute dark:before:-inset-px dark:before:rounded-xl dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset] forced-colors:outline overflow-clip">
+            <Image
+              src={banner}
+              alt="Hero image"
+              className="hidden md:inline-block h-full object-cover object-left dark:hidden ml:pr-4"
+            />
+            <Image
+              src={hero_dark}
+              alt="Hero image"
+              className="hidden dark:md:inline-block h-full object-cover object-left ml:pr-4"
+            />
+            <Image
+              src={banner_mobile}
+              alt="Hero image"
+              className="block md:hidden dark:hidden w-full mt-[60px]"
+            />
+            <Image
+              src={hero_mobile_dark}
+              alt="Hero image"
+              className="hidden dark:inline-block dark:md:hidden w-full mt-[60px]"
+            />
+          </div>
+        </div>
+
+        <div
           id="register"
           className="mx-auto max-w-6xl flex flex-col px-8 mt-8 lg:mt-12 text-neutral-950 dark:text-gray-50 md:flex-row overflow-hidden bg-grey-bg dark:bg-grey">
           <div className="flex justify-center items-center w-full md:w-2/5 mt-[-55px] md:mt-[60px]">
             <Image
-              src={demos_icon}
+              src={mascot}
               alt="Demo"
               className="hidden md:inline-block object-cover object-right dark:hidden ml:pr-4"
             />
             <Image
-              src={demos_icon_dark}
+              src={mascot}
               alt="Demo"
               className="hidden dark:md:inline-block object-cover object-left ml:pr-4"
             />
