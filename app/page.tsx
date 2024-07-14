@@ -6,20 +6,17 @@ import logo from '@/public/logo.png';
 import logo_white from '@/public/logo_white.png';
 import hero from '@/public/hero/home_hero.svg';
 import hero_dark from '@/public/hero/home_hero_dark.svg';
-import hero_mobile from '@/public/hero/home_hero_mobile.svg';
-import hero_mobile_dark from '@/public/hero/home_hero_mobile_dark.svg';
-import googlefordevelopers from '@/public/googlefordevelopers.svg';
 import x from '@/public/x.svg';
 import linkedin from '@/public/linkedin.svg';
 import facebook from '@/public/facebook.svg';
 import mascot from '@/public/mascot.png';
 import banner from '@/public/banner.png';
 import gdgcloudhanoi from '@/public/gdgcloudhanoi.png';
+import gdgcloudhanoi_colorful from '@/public/gdgcloudhanoi_colorful.png';
 import via from '@/public/via.png';
 import ptit from '@/public/ptit.png';
 import fci from '@/public/fci.png';
 import gdg from '@/public/gdg.png';
-import save_the_date from '@/public/save_the_date.gif';
 import banner_mobile from '@/public/banner_mobile.png';
 import ThemeSwitcher from '@/components/ThemeSwitcher';
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
@@ -50,6 +47,8 @@ export default function Home() {
   } = useForm<Inputs>();
 
   let [isOpen, setIsOpen] = useState(false);
+
+  const today = new Date().toISOString().split('T')[0];
 
   function open() {
     setIsOpen(true);
@@ -127,8 +126,9 @@ export default function Home() {
               Cùng tham gia cuộc thi Warrior Developers
             </h1>
             <p className="font-normal text-justify sm:s-h6 md:l-h6 mb-4">
-              Diễn ra ngay trong sự kiện Google I/O Extended Cloud Hanoi để nhận
-              được những phần quà và cơ hội việc làm hấp dẫn.
+              Tham gia ngay đấu trường <b>Warrior Developers</b> tại ngày hội
+              công nghệ Google I/O Extended Cloud Hanoi 2024 để nâng tầm sự
+              nghiệp và kiến tạo tương lai của chính mình, bạn nhé!
             </p>
             <Link href="#register">
               <Button className="transition ease-in-out hover:translate-x-1 hover:scale-105 duration-100 relative isolate inline-flex items-center justify-center gap-x-2 rounded-lg border text-base/6 font-semibold px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing.3)-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] sm:text-sm/6 focus:outline-none data-[focus]:outline data-[focus]:outline-2 data-[focus]:outline-offset-2 data-[focus]:outline-blue-500 data-[disabled]:opacity-50 [&>[data-slot=icon]]:-mx-0.5 [&>[data-slot=icon]]:my-0.5 [&>[data-slot=icon]]:size-5 [&>[data-slot=icon]]:shrink-0 [&>[data-slot=icon]]:text-[--btn-icon] [&>[data-slot=icon]]:sm:my-1 [&>[data-slot=icon]]:sm:size-4 forced-colors:[--btn-icon:ButtonText] forced-colors:data-[hover]:[--btn-icon:ButtonText] border-transparent bg-[--btn-border] dark:bg-[--btn-bg] before:absolute before:inset-0 before:-z-10 before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-[--btn-bg] before:shadow dark:before:hidden dark:border-white/5 after:absolute after:inset-0 after:-z-10 after:rounded-[calc(theme(borderRadius.lg)-1px)] after:shadow-[shadow:inset_0_1px_theme(colors.white/15%)] after:data-[active]:bg-[--btn-hover-overlay] after:data-[hover]:bg-[--btn-hover-overlay] dark:after:-inset-px dark:after:rounded-lg before:data-[disabled]:shadow-none after:data-[disabled]:shadow-none text-white [--btn-bg:theme(colors.zinc.900)] [--btn-border:theme(colors.zinc.950/90%)] [--btn-hover-overlay:theme(colors.white/10%)] dark:text-white dark:[--btn-bg:theme(colors.zinc.600)] dark:[--btn-hover-overlay:theme(colors.white/5%)] [--btn-icon:theme(colors.zinc.400)] data-[active]:[--btn-icon:theme(colors.zinc.300)] data-[hover]:[--btn-icon:theme(colors.white)]">
@@ -137,26 +137,16 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-          <div className="flex justify-end items-end w-full md:w-3/5 mt-[-55px] md:mt-[60px]">
+          <div className="flex justify-end items-end w-full p-8 md:p-0 md:w-3/5 mt-[-55px] md:mt-[60px]">
             <Image
               src={hero}
               alt="Hero image"
-              className="hidden md:inline-block h-full object-cover object-left dark:hidden ml:pr-4"
+              className=" h-full object-cover object-left dark:hidden ml:pr-4"
             />
             <Image
               src={hero_dark}
               alt="Hero image"
-              className="hidden dark:md:inline-block h-full object-cover object-left ml:pr-4"
-            />
-            <Image
-              src={hero_mobile}
-              alt="Hero image"
-              className="block md:hidden dark:hidden w-full mt-[60px]"
-            />
-            <Image
-              src={hero_mobile_dark}
-              alt="Hero image"
-              className="hidden dark:inline-block dark:md:hidden w-full mt-[60px]"
+              className="hidden dark:inline-block h-full object-cover object-left ml:pr-4"
             />
           </div>
         </div>
@@ -180,15 +170,6 @@ export default function Home() {
                     />
                   </span>
                 </li>
-                <li key={4}>
-                  <span className="relative">
-                    <Image
-                      className="w-64"
-                      src={fci}
-                      alt="Google I/O Extended Cloud Hanoi 2024"
-                    />
-                  </span>
-                </li>
                 <li key={2}>
                   <span className="relative">
                     <Image
@@ -198,20 +179,29 @@ export default function Home() {
                     />
                   </span>
                 </li>
+                <li key={3}>
+                  <span className="relative">
+                    <Image
+                      className="w-64"
+                      src={fci}
+                      alt="Google I/O Extended Cloud Hanoi 2024"
+                    />
+                  </span>
+                </li>
+                <li key={4}>
+                  <span className="relative">
+                    <Image
+                      className="w-64"
+                      src={via}
+                      alt="Google I/O Extended Cloud Hanoi 2024"
+                    />
+                  </span>
+                </li>
                 <li key={5}>
                   <span className="relative">
                     <Image
                       className="w-64"
                       src={ptit}
-                      alt="Google I/O Extended Cloud Hanoi 2024"
-                    />
-                  </span>
-                </li>
-                <li key={3}>
-                  <span className="relative">
-                    <Image
-                      className="w-64"
-                      src={via}
                       alt="Google I/O Extended Cloud Hanoi 2024"
                     />
                   </span>
@@ -234,7 +224,7 @@ export default function Home() {
                 <article>
                   <MapPinIcon className="w-8" />
                   <p className="mt-6 font-display text-2xl font-semibold ">
-                    Học viện Công nghệ Bưu chính viễn thông
+                    Học viện Công nghệ Bưu chính Viễn thông
                   </p>
                   <p className="mt-4 text-base">
                     96A Đường Trần Phú, P. Mộ Lao, Hà Đông, Hà Nội
@@ -253,8 +243,11 @@ export default function Home() {
                   <p className="mt-6 font-display text-2xl font-semibold">
                     Thứ bảy, 27 tháng 7
                   </p>
-                  <p className="mt-4 text-base">
-                    Nhấn để thêm ngay vào Calendar của bạn nhé
+                  <p className="mt-4 text-justify text-base">
+                    Đừng quên thêm ngay sự kiện Google I/O Extended Cloud Hanoi
+                    2024 vào Calendar của bạn để tham gia Warrior Developers
+                    đúng giờ và không bỏ lỡ các hoạt động thú vị khác chỉ có tại
+                    ngày hội công nghệ sôi động nhất mùa hè này!
                   </p>
                 </article>
               </Link>
@@ -304,7 +297,7 @@ export default function Home() {
               className="hidden dark:md:inline-block object-cover object-left ml:pr-4"
             />
           </div>
-          <div className="flex flex-col md:justify-center py-16 w-full md:w-3/5 md:p-10 md:pr-0 dark:text-white z-10 text-left items-center md:items-start">
+          <div className="flex flex-col md:justify-center pt-16 w-full md:w-3/5 dark:text-white z-10 text-left items-center md:items-start">
             <div className="relative h-full w-full rounded-xl bg-white shadow-[0px_0px_0px_1px_rgba(9,9,11,0.07),0px_2px_2px_0px_rgba(9,9,11,0.05)] dark:bg-zinc-900 dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)] dark:before:pointer-events-none dark:before:absolute dark:before:-inset-px dark:before:rounded-xl dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset] forced-colors:outline">
               <div className="grid h-full w-full overflow-hidden place-items-start justify-items-center p-6 py-8 sm:p-8 lg:p-12">
                 <form
@@ -404,6 +397,7 @@ export default function Home() {
                           <input
                             type="date"
                             placeholder="01/01/2001"
+                            max={today}
                             className={[
                               'relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border bg-transparent data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]',
                               errors.birth
@@ -523,9 +517,9 @@ export default function Home() {
         <div className="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-6 text-grey-500 text-[16px] font-medium flex-1">
           <div className="text-2xl font-semibold lg:mr-6 text-grey-500 flex justify-center lg:justify-between w-full lg:w-auto items-center">
             <Image
-              className="w-32"
-              src={googlefordevelopers}
-              alt="Google for Developers"
+              className="w-64"
+              src={gdgcloudhanoi_colorful}
+              alt="GDG Cloud Hanoi"
             />
           </div>
         </div>
