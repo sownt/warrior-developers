@@ -19,6 +19,7 @@ import via from '@/public/via.png';
 import ptit from '@/public/ptit.png';
 import fci from '@/public/fci.png';
 import gdg from '@/public/gdg.png';
+import save_the_date from '@/public/save_the_date.gif';
 import banner_mobile from '@/public/banner_mobile.png';
 import ThemeSwitcher from '@/components/ThemeSwitcher';
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
@@ -268,22 +269,22 @@ export default function Home() {
             <Image
               src={banner}
               alt="Hero image"
-              className="hidden md:inline-block h-full object-cover object-left dark:hidden ml:pr-4"
+              className="hidden md:inline-block h-full dark:hidden"
             />
             <Image
-              src={hero_dark}
+              src={banner}
               alt="Hero image"
-              className="hidden dark:md:inline-block h-full object-cover object-left ml:pr-4"
+              className="hidden dark:md:inline-block h-full"
             />
             <Image
               src={banner_mobile}
               alt="Hero image"
-              className="block md:hidden dark:hidden w-full mt-[60px]"
+              className="block md:hidden dark:hidden w-full"
             />
             <Image
-              src={hero_mobile_dark}
+              src={banner_mobile}
               alt="Hero image"
-              className="hidden dark:inline-block dark:md:hidden w-full mt-[60px]"
+              className="hidden dark:inline-block dark:md:hidden w-full"
             />
           </div>
         </div>
@@ -518,7 +519,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="mt-12 lg:mt-24 px-16 py-8 bg-black flex flex-col lg:flex-row lg:justify-between lg:items-center w-max-full">
+      <footer className="mt-12 lg:mt-24 px-16 py-8 bg-zinc-950 flex flex-col lg:flex-row lg:justify-between lg:items-center w-max-full border-t-[1px] md:border-t-2 border-zinc-800">
         <div className="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-6 text-grey-500 text-[16px] font-medium flex-1">
           <div className="text-2xl font-semibold lg:mr-6 text-grey-500 flex justify-center lg:justify-between w-full lg:w-auto items-center">
             <Image
