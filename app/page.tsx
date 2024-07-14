@@ -120,8 +120,8 @@ export default function Home() {
         </nav>
       </div>
       <main>
-        <div className="mx-auto max-w-6xl flex flex-col md:flex-row overflow-hidden bg-grey-bg dark:bg-grey">
-          <div className="flex flex-col md:justify-center px-8 py-16 w-full md:w-2/5 md:p-10 md:pr-0 dark:text-white z-10 text-center md:text-left items-center md:items-start">
+        <div className="mx-auto max-w-6xl flex flex-col md:mt-16 md:flex-row overflow-hidden bg-grey-bg dark:bg-grey">
+          <div className="flex flex-col md:justify-center px-8 py-16 w-full md:w-3/5 md:p-10 md:pr-0 dark:text-white z-10 text-center md:text-left items-center md:items-start">
             <h1 className="text-2xl sm:text-4xl font-semibold mb-4 sm:s-h3 md:l-h1-2">
               Tham gia ngay đấu trường Warrior Developers
             </h1>
