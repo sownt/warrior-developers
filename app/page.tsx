@@ -244,10 +244,9 @@ export default function Home() {
                     Thứ bảy, 27 tháng 7
                   </p>
                   <p className="mt-4 text-justify text-base">
-                    Đừng quên thêm ngay sự kiện Google I/O Extended Cloud Hanoi
-                    2024 vào Calendar của bạn để tham gia Warrior Developers
-                    đúng giờ và không bỏ lỡ các hoạt động thú vị khác chỉ có tại
-                    ngày hội công nghệ sôi động nhất mùa hè này!
+                    Thêm ngay sự kiện Google I/O Extended Cloud Hanoi 2024 vào
+                    Calendar của bạn để tham gia Warrior Developers đúng giờ và
+                    không bỏ lỡ các hoạt động thú vị khác!
                   </p>
                 </article>
               </Link>
@@ -284,7 +283,7 @@ export default function Home() {
 
         <div
           id="register"
-          className="mx-auto max-w-6xl flex flex-col px-8 mt-8 lg:mt-12 text-neutral-950 dark:text-gray-50 md:flex-row overflow-hidden bg-grey-bg dark:bg-grey">
+          className="mx-auto max-w-6xl flex flex-col px-8 mt-8 lg:mt-0 text-neutral-950 dark:text-gray-50 md:flex-row">
           <div className="flex justify-center items-center w-full md:w-2/5 mt-[-55px] md:mt-[60px]">
             <Image
               src={mascot}
