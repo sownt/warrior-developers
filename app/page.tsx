@@ -29,12 +29,14 @@ import { useState } from 'react';
 import { ErrorMessage } from '@hookform/error-message';
 
 type Inputs = {
+  phone: string;
   email: string;
   first: string;
   last: string;
   gender: number;
   birth: Date;
   job_title: string;
+  attendee: number;
 };
 
 export default function Home() {
@@ -79,7 +81,9 @@ export default function Home() {
           'email'
         )}&first=${watch('first')}&last=${watch('last')}&birth=${watch(
           'birth'
-        )}&gender=${watch('gender')}&job_title=${watch('job_title')}`
+        )}&gender=${watch('gender')}&job_title=${watch(
+          'job_title'
+        )}&phone=${watch('phone')}&attendee=${watch('attendee')}`
       );
       if (!res.ok) {
         // alert("Đã xảy ra lỗi, vui lòng liên hệ BTC để được hỗ trợ!");
@@ -387,6 +391,34 @@ export default function Home() {
                       </div>
                       <div className="mt-3 space-y-4">
                         <label
+                          htmlFor="phone"
+                          className="select-none text-base/6 text-zinc-950 data-[disabled]:opacity-50 sm:text-sm/6 dark:text-white">
+                          Số điện thoại
+                        </label>
+                        <span className="relative block w-full before:absolute before:inset-px before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-white before:shadow dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-inset after:ring-transparent sm:after:focus-within:ring-2 sm:after:focus-within:ring-blue-500 has-[[data-disabled]]:opacity-50 before:has-[[data-disabled]]:bg-zinc-950/5 before:has-[[data-disabled]]:shadow-none before:has-[[data-invalid]]:shadow-red-500/10">
+                          <input
+                            placeholder="032 1234 123"
+                            className={[
+                              'relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border bg-transparent data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]',
+                              errors.phone
+                                ? 'border-red-700 data-[hover]:border-red-700 dark:border-red-700 data-[hover]:dark:border-red-700'
+                                : 'border-zinc-950/10 data-[hover]:border-zinc-950/20 dark:border-white/10 dark:data-[hover]:border-white/20 dark:bg-white/5 focus:outline-none data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15',
+                            ].join(' ')}
+                            {...register('phone', {
+                              required: 'Vui lòng nhập số điện thoại.',
+                              pattern: {
+                                value: /^[0-9]{10}$/,
+                                message: 'Số điện thoại không hợp lệ.',
+                              },
+                            })}
+                          />
+                        </span>
+                        <span className="select-none text-base/10 text-red-700 data-[disabled]:opacity-50 sm:text-sm/10 dark:text-red-500">
+                          <ErrorMessage errors={errors} name="phone" />
+                        </span>
+                      </div>
+                      <div className="mt-3 space-y-4">
+                        <label
                           htmlFor="birth"
                           className="select-none text-base/6 text-zinc-950 data-[disabled]:opacity-50 sm:text-sm/6 dark:text-white">
                           Ngày sinh
@@ -475,6 +507,55 @@ export default function Home() {
                             })}
                           />
                         </span>
+                      </div>
+                      <div className="mt-3 space-y-4">
+                        <label
+                          htmlFor="attendee"
+                          className="select-none text-base/6 text-zinc-950 data-[disabled]:opacity-50 sm:text-sm/6 dark:text-white">
+                          Bạn đã đăng ký{' '}
+                          <a
+                            className="font-bold"
+                            href="https://gdgcloudhanoi.dev/iox-register">
+                            Google I/O Extended Cloud Hanoi 2024
+                          </a>{' '}
+                          chưa?{' '}
+                          <span className="font-light">
+                            (Vui lòng đăng ký sự kiện để có thể tham gia phần
+                            thì lập trình)
+                          </span>
+                        </label>
+                        <span className="relative block w-full before:absolute before:inset-px before:rounded-[calc(theme(borderRadius.lg)-1px)] before:bg-white before:shadow dark:before:hidden after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-inset after:ring-transparent sm:after:focus-within:ring-2 sm:after:focus-within:ring-blue-500 has-[[data-disabled]]:opacity-50 before:has-[[data-disabled]]:bg-zinc-950/5 before:has-[[data-disabled]]:shadow-none before:has-[[data-invalid]]:shadow-red-500/10">
+                          <select
+                            className={[
+                              'relative block w-full appearance-none rounded-lg px-[calc(theme(spacing[3.5])-1px)] py-[calc(theme(spacing[2.5])-1px)] sm:px-[calc(theme(spacing[3])-1px)] sm:py-[calc(theme(spacing[1.5])-1px)] text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white border bg-transparent data-[disabled]:dark:bg-white/[2.5%] dark:[color-scheme:dark]',
+                              errors.attendee
+                                ? 'border-red-700 data-[hover]:border-red-700 dark:border-red-700 data-[hover]:dark:border-red-700'
+                                : 'border-zinc-950/10 data-[hover]:border-zinc-950/20 dark:border-white/10 dark:data-[hover]:border-white/20 dark:bg-white/5 focus:outline-none data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15',
+                            ].join(' ')}
+                            {...register('attendee', {
+                              required: 'Vui lòng chọn',
+                              pattern: /^[01]$/i,
+                            })}>
+                            <option
+                              value=""
+                              className="text-zinc-950 dark:text-white bg-white dark:bg-zinc-950">
+                              Vui lòng chọn
+                            </option>
+                            <option
+                              className="text-zinc-950 dark:text-white bg-white dark:bg-zinc-950"
+                              value="1">
+                              Đã đăng ký
+                            </option>
+                            <option
+                              className="text-zinc-950 dark:text-white bg-white dark:bg-zinc-950"
+                              value="0">
+                              Chưa đăng ký
+                            </option>
+                          </select>
+                        </span>
+                        {/* <span className="select-none text-base/10 text-red-700 data-[disabled]:opacity-50 sm:text-sm/10 dark:text-white">
+                          <ErrorMessage errors={errors} name="gender" />
+                        </span> */}
                       </div>
                     </div>
                   </fieldset>
