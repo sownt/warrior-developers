@@ -287,7 +287,7 @@ export default function Home() {
         <div
           id="register"
           className="mx-auto max-w-6xl flex flex-col px-8 mt-8 lg:mt-0 text-neutral-950 dark:text-gray-50 md:flex-row">
-          <div className="flex justify-center items-center w-full md:w-2/5 mt-[-55px] md:mt-[60px]">
+          <div className="flex justify-center items-center w-full md:w-1/2 mt-[-55px] md:mt-[60px]">
             <Image
               src={mascot}
               alt="Demo"
@@ -299,7 +299,7 @@ export default function Home() {
               className="hidden dark:md:inline-block object-cover object-left ml:pr-4"
             />
           </div>
-          <div className="flex flex-col md:justify-center pt-16 w-full md:w-3/5 dark:text-white z-10 text-left items-center md:items-start">
+          <div className="flex flex-col md:justify-center pt-16 w-full md:w-1/2 dark:text-white z-10 text-left items-center md:items-start">
             <div className="relative h-full w-full rounded-xl bg-white shadow-[0px_0px_0px_1px_rgba(9,9,11,0.07),0px_2px_2px_0px_rgba(9,9,11,0.05)] dark:bg-zinc-900 dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)] dark:before:pointer-events-none dark:before:absolute dark:before:-inset-px dark:before:rounded-xl dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset] forced-colors:outline">
               <div className="grid h-full w-full overflow-hidden place-items-start justify-items-center p-6 py-8 sm:p-8 lg:p-12">
                 <form
