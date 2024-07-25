@@ -215,8 +215,227 @@ export default function Home() {
         </div>
 
         <div
+          id="agenda"
+          className="mx-auto max-w-6xl px-8 mt-16 lg:mt-24 text-neutral-950 dark:text-gray-50">
+          <h2
+            id="speakers-title"
+            className="font-display text-3xl font-medium tracking-tighter sm:text-4xl">
+            Agenda
+          </h2>
+
+          <div className="mt-12 flex flex-col gap-8">
+            <div className="relative lg:pl-8">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 6 6"
+                className="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-black stroke-black dark:fill-white dark:stroke-white">
+                <path
+                  d="M3 0L6 3L3 6L0 3Z"
+                  stroke-width="2"
+                  stroke-linejoin="round"></path>
+              </svg>
+              <div className="relative">
+                <span className="font-mono text-sm">13:00 - 14:00</span>
+                <span className="mt-1.5 block text-xl font-semibold tracking-tight">
+                  Check-in & Booth Experience
+                </span>
+              </div>
+            </div>
+            <div className="relative lg:pl-8">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 6 6"
+                className="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-black stroke-black dark:fill-white dark:stroke-white">
+                <path
+                  d="M3 0L6 3L3 6L0 3Z"
+                  stroke-width="2"
+                  stroke-linejoin="round"></path>
+              </svg>
+              <div className="relative">
+                <span className="font-mono text-sm">14:00 - 14:15</span>
+                <span className="mt-1.5 block text-xl font-semibold tracking-tight">
+                  Khai mạc, Chào mừng
+                </span>
+              </div>
+            </div>
+            <div className="relative lg:pl-8">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 6 6"
+                className="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-black stroke-black dark:fill-white dark:stroke-white">
+                <path
+                  d="M3 0L6 3L3 6L0 3Z"
+                  stroke-width="2"
+                  stroke-linejoin="round"></path>
+              </svg>
+              <div className="relative">
+                <span className="font-mono text-sm">14:15 - 14:40</span>
+                <span className="mt-1.5 block text-xl font-semibold tracking-tight">
+                  Keynote #1: AI Recap from Google I/O 2024
+                </span>
+                <span className="text-sm">
+                  Anh Dương Nguyễn - Founder của ZenAI, GDE @ML
+                </span>
+              </div>
+            </div>
+            <div className="relative lg:pl-8">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 6 6"
+                className="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-black stroke-black dark:fill-white dark:stroke-white">
+                <path
+                  d="M3 0L6 3L3 6L0 3Z"
+                  stroke-width="2"
+                  stroke-linejoin="round"></path>
+              </svg>
+              <div className="relative">
+                <span className="font-mono text-sm">14:40 - 15:15</span>
+                <span className="mt-1.5 block text-xl font-semibold tracking-tight">
+                  Keynote #2: Applying Big Data Analytics/AI in the
+                  Telecommunication Industry
+                </span>
+                <span className="text-sm">
+                  Chị Nguyễn Trần Ngọc Linh - Giám đốc Trung tâm Phân tích dữ
+                  liệu Viettel Telecom
+                </span>
+              </div>
+            </div>
+            <div className="relative lg:pl-8">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 6 6"
+                className="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-black stroke-black dark:fill-white dark:stroke-white">
+                <path
+                  d="M3 0L6 3L3 6L0 3Z"
+                  stroke-width="2"
+                  stroke-linejoin="round"></path>
+              </svg>
+              <div className="relative">
+                <span className="font-mono text-sm">15:15 - 15:50</span>
+                <span className="mt-1.5 block text-xl font-semibold tracking-tight">
+                  Keynote #3: Semantic layer in data lake to productionize
+                  Generative AI application
+                </span>
+                <span className="text-sm">
+                  Anh Minh Tú Trần - Data Scientist @ Techcombank
+                </span>
+              </div>
+            </div>
+            <div className="relative lg:pl-8">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 6 6"
+                className="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-black stroke-black dark:fill-white dark:stroke-white">
+                <path
+                  d="M3 0L6 3L3 6L0 3Z"
+                  stroke-width="2"
+                  stroke-linejoin="round"></path>
+              </svg>
+              <div className="relative">
+                <span className="font-mono text-sm">15:50 - 16:30</span>
+                <span className="mt-1.5 block text-xl font-semibold tracking-tight">
+                  Các hoạt động diễn ra đồng thời
+                </span>
+                <div className="relative lg:pl-8 mt-2">
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 6 6"
+                    className="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-slate-800 stroke-slate-800 dark:fill-slate-200 dark:stroke-slate-200">
+                    <path
+                      d="M3 0L6 3L3 6L0 3Z"
+                      stroke-width="2"
+                      stroke-linejoin="round"></path>
+                  </svg>
+                  <span>Networking & Tea Break</span>
+                </div>
+                <div className="relative lg:pl-8 mt-2">
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 6 6"
+                    className="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-slate-800 stroke-slate-800 dark:fill-slate-200 dark:stroke-slate-200">
+                    <path
+                      d="M3 0L6 3L3 6L0 3Z"
+                      stroke-width="2"
+                      stroke-linejoin="round"></path>
+                  </svg>
+                  <span>Đấu trường Warrior Developers</span>
+                </div>
+                <div className="relative lg:pl-8 mt-2">
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 6 6"
+                    className="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-slate-800 stroke-slate-800 dark:fill-slate-200 dark:stroke-slate-200">
+                    <path
+                      d="M3 0L6 3L3 6L0 3Z"
+                      stroke-width="2"
+                      stroke-linejoin="round"></path>
+                  </svg>
+                  <span>Phỏng vấn giả lập với HRM</span>
+                </div>
+              </div>
+            </div>
+            <div className="relative lg:pl-8">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 6 6"
+                className="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-black stroke-black dark:fill-white dark:stroke-white">
+                <path
+                  d="M3 0L6 3L3 6L0 3Z"
+                  stroke-width="2"
+                  stroke-linejoin="round"></path>
+              </svg>
+              <div className="relative">
+                <span className="font-mono text-sm">16:30 - 17:05</span>
+                <span className="mt-1.5 block text-xl font-semibold tracking-tight">
+                  Keynote #4: Exploring Generative AI and Cloud-Powered AI
+                  Advancements
+                </span>
+                <span className="text-sm">
+                  PGS. TS. Ngô Xuân Bách - Phó giám đốc Khối Sản phẩm AI, Giám
+                  đốc Trung tâm GenAI, FPT Smart Cloud
+                </span>
+              </div>
+            </div>
+            <div className="relative lg:pl-8">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 6 6"
+                className="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-black stroke-black dark:fill-white dark:stroke-white">
+                <path
+                  d="M3 0L6 3L3 6L0 3Z"
+                  stroke-width="2"
+                  stroke-linejoin="round"></path>
+              </svg>
+              <div className="relative">
+                <span className="font-mono text-sm">17:05 - 17:30</span>
+                <span className="mt-1.5 block text-xl font-semibold tracking-tight">
+                  Phát biểu - Công bố - Trao giải
+                </span>
+              </div>
+            </div>
+            <div className="relative lg:pl-8">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 6 6"
+                className="absolute left-[-0.5px] top-[0.5625rem] hidden h-1.5 w-1.5 overflow-visible lg:block fill-black stroke-black dark:fill-white dark:stroke-white">
+                <path
+                  d="M3 0L6 3L3 6L0 3Z"
+                  stroke-width="2"
+                  stroke-linejoin="round"></path>
+              </svg>
+              <div className="relative">
+                <span className="font-mono text-sm">17:30</span>
+                <span className="mt-1.5 block text-xl font-semibold tracking-tight">
+                  Group photos & Closing
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
           id="info"
-          className="mx-auto max-w-6xl px-8 mt-8 lg:mt-12 text-neutral-950 dark:text-gray-50">
+          className="mx-auto max-w-6xl px-8 mt-12 lg:mt-24 text-neutral-950 dark:text-gray-50">
           <div className="flex flex-col md:grid md:grid-cols-2 gap-8">
             <div className="flex">
               <Link
