@@ -254,7 +254,7 @@ export default function Home() {
               <div className="relative">
                 <span className="font-mono text-sm">14:00 - 14:15</span>
                 <span className="mt-1.5 block text-xl font-semibold tracking-tight">
-                  Khai mạc, Chào mừng
+                  Khai mạc chương trình
                 </span>
               </div>
             </div>
@@ -268,13 +268,14 @@ export default function Home() {
                   stroke-width="2"
                   stroke-linejoin="round"></path>
               </svg>
-              <div className="relative">
+              <div className="relative text-justify">
                 <span className="font-mono text-sm">14:15 - 14:40</span>
                 <span className="mt-1.5 block text-xl font-semibold tracking-tight">
                   Keynote #1: AI Recap from Google I/O 2024
                 </span>
                 <span className="text-sm">
-                  Anh Dương Nguyễn - Founder của ZenAI, GDE @ML
+                  Anh Dương Nguyễn - Founder/CEO @ ZenAI, Google Developer
+                  Expert @ Machine Learning
                 </span>
               </div>
             </div>
@@ -288,15 +289,15 @@ export default function Home() {
                   stroke-width="2"
                   stroke-linejoin="round"></path>
               </svg>
-              <div className="relative">
+              <div className="relative text-justify">
                 <span className="font-mono text-sm">14:40 - 15:15</span>
                 <span className="mt-1.5 block text-xl font-semibold tracking-tight">
-                  Keynote #2: Applying Big Data Analytics/AI in the
+                  Keynote #2: Applying Big Data Analytics / AI in the
                   Telecommunication Industry
                 </span>
                 <span className="text-sm">
-                  Chị Nguyễn Trần Ngọc Linh - Giám đốc Trung tâm Phân tích dữ
-                  liệu Viettel Telecom
+                  Chị Nguyễn Trần Ngọc Linh - Director of Viettel Big Data
+                  Analytics Center @ Viettel Telecom
                 </span>
               </div>
             </div>
@@ -310,14 +311,15 @@ export default function Home() {
                   stroke-width="2"
                   stroke-linejoin="round"></path>
               </svg>
-              <div className="relative">
+              <div className="relative text-justify">
                 <span className="font-mono text-sm">15:15 - 15:50</span>
                 <span className="mt-1.5 block text-xl font-semibold tracking-tight">
                   Keynote #3: Semantic layer in data lake to productionize
                   Generative AI application
                 </span>
                 <span className="text-sm">
-                  Anh Minh Tú Trần - Data Scientist @ Techcombank
+                  Anh Ngô Xuân Bách - Associate Professor, Deputy Director of AI
+                  Product Division @ FPT Smart Cloud
                 </span>
               </div>
             </div>
@@ -331,7 +333,7 @@ export default function Home() {
                   stroke-width="2"
                   stroke-linejoin="round"></path>
               </svg>
-              <div className="relative">
+              <div className="relative text-justify">
                 <span className="font-mono text-sm">15:50 - 16:30</span>
                 <span className="mt-1.5 block text-xl font-semibold tracking-tight">
                   Các hoạt động diễn ra đồng thời
@@ -384,15 +386,15 @@ export default function Home() {
                   stroke-width="2"
                   stroke-linejoin="round"></path>
               </svg>
-              <div className="relative">
+              <div className="relative text-justify">
                 <span className="font-mono text-sm">16:30 - 17:05</span>
                 <span className="mt-1.5 block text-xl font-semibold tracking-tight">
                   Keynote #4: Exploring Generative AI and Cloud-Powered AI
                   Advancements
                 </span>
                 <span className="text-sm">
-                  PGS. TS. Ngô Xuân Bách - Phó giám đốc Khối Sản phẩm AI, Giám
-                  đốc Trung tâm GenAI, FPT Smart Cloud
+                  Anh Ngô Xuân Bách - Associate Professor, Deputy Director of AI
+                  Product Division @ FPT Smart Cloud
                 </span>
               </div>
             </div>
@@ -409,7 +411,7 @@ export default function Home() {
               <div className="relative">
                 <span className="font-mono text-sm">17:05 - 17:30</span>
                 <span className="mt-1.5 block text-xl font-semibold tracking-tight">
-                  Phát biểu - Công bố - Trao giải
+                  Công bố & Trao giải Đấu trường Warrior Developers
                 </span>
               </div>
             </div>
@@ -426,7 +428,7 @@ export default function Home() {
               <div className="relative">
                 <span className="font-mono text-sm">17:30</span>
                 <span className="mt-1.5 block text-xl font-semibold tracking-tight">
-                  Group photos & Closing
+                  Chụp ảnh & Kết thúc
                 </span>
               </div>
             </div>
